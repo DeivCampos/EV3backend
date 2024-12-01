@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3>Editar Producto: {{ producto.nombre }}</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <button type="submit" class="btn btn-success">Actualizar Producto</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

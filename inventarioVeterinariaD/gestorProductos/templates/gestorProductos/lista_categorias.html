@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Gestión de Categorías</h2>
+    
+    <div class="mb-3 text-end">
+        <a href="{% url 'crear_categoria' %}" class="btn btn-success">Añadir Nueva Categoría</a>
+    </div>
+    
+    {% if categorias %}
+        <table id="tabla-categorias" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in categorias %}
+                    <tr>
+                        <td>{{ categoria.id }}</td>
+                        <td>{{ categoria.nombre }}</td>
+                        <td>{{ categoria.descripcion }}</td>
+                        <td>
+                            <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-primary btn-sm">Editar</a>
+                            <form action="{% url 'eliminar_categoria' categoria.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center">No hay categorías registradas. <a href="{% url 'crear_categoria' %}">Añadir una ahora</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

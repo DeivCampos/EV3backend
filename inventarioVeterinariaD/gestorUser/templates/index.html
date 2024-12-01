@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 text-center">
+        <h1 class="mb-4">Bienvenido a Clínica Veterinaria Chucky PB</h1>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Nuestros Servicios</h5>
+                <ul class="list-group">
+                    {% for servicio in servicios %}
+                        <li class="list-group-item">{{ servicio }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Horario de Atención</h5>
+                        <p>Lunes a Viernes: 9:00 AM - 7:00 PM</p>
+                        <p>Sábados: 10:00 AM - 4:00 PM</p>
+                        <p>Domingos: Emergencias</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Contacto</h5>
+                        <p>📞 Teléfono: +56935244833 </p>
+                        <p>📧 Email: veterinariaCPB@chuckypb.cl</p>
+                        <p>📍 Dirección: 1 sur, 1 oriente, Talca</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enlaces al CRUD -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Gestión de Productos</h5>
+                        <a href="{% url 'lista_productos' %}" class="btn btn-primary w-100">Ver Productos</a>
+                    </div>
+                </div>
+            </div>
+            {% if user.is_superuser %}
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Gestión de Categorías</h5>
+                            <a href="{% url 'lista_categorias' %}" class="btn btn-secondary w-100">Ver Categorías</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
